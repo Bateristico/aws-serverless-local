@@ -1,0 +1,17 @@
+service: dynamo-crud-api
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-2
+  environment:
+    DYNAMODB_TABLE_NAME: ${self:custom.postsTableName}
+
+custom:
+  postsTableName: posts-table=${self:provider.stage}
+
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-dynamodb-local
+  - serverless-offline
